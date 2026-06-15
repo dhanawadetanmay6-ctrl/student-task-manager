@@ -2,6 +2,6 @@
   {
     "id": 1,
     "task": "Learn Node.js",
-    "completed": false
+    "completed": true
   }
 ]

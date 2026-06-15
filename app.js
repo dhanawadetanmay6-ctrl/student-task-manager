@@ -1,16 +1,18 @@
 const fs = require("fs");
 
-// Read tasks from tasks.json
+// Read tasks
 const data = fs.readFileSync("tasks.json", "utf8");
-
-// Convert JSON text to JavaScript object
 const tasks = JSON.parse(data);
 
-console.log("===== TASKS =====");
+// Find task with ID 1
+const task = tasks.find((t) => t.id === 1);
 
-// Display all tasks
-tasks.forEach((task) => {
-  const status = task.completed ? "Done" : "Pending";
+if (task) {
+  task.completed = true;
 
-  console.log(`${task.id}. ${task.task} [${status}]`);
-});
+  fs.writeFileSync("tasks.json", JSON.stringify(tasks, null, 2));
+
+  console.log("Task marked as completed!");
+} else {
+  console.log("Task not found!");
+}
