@@ -1,11 +1,16 @@
 const fs = require("fs");
 
-const task = {
-  id: 1,
-  task: "Learn Node.js",
-  completed: false
-};
+// Read tasks from tasks.json
+const data = fs.readFileSync("tasks.json", "utf8");
 
-fs.writeFileSync("tasks.json", JSON.stringify([task], null, 2));
+// Convert JSON text to JavaScript object
+const tasks = JSON.parse(data);
 
-console.log("Task added successfully!");
+console.log("===== TASKS =====");
+
+// Display all tasks
+tasks.forEach((task) => {
+  const status = task.completed ? "Done" : "Pending";
+
+  console.log(`${task.id}. ${task.task} [${status}]`);
+});
